@@ -14,10 +14,11 @@
   let localUser = {};
 let users2;
 const getName = async() => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users')
-  const data = await res.json();
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users')
+    const data = await res.json();
 
-  for(const user of data) {
+    for(const user of data) {
     if(user["username"]) {
       const pageUser = document.getElementById('username');
       localUser.username = user.username;
@@ -26,6 +27,12 @@ const getName = async() => {
       return;
     }
   }
+  }
+  catch(error) {
+    console.error("Error fetching data:", error);
+  }
+
+  
 }
 
 getName();
